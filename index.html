@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'none'; media-src 'none'">
+ <meta name="referrer" content="no-referrer">
+ <meta name="description" content="课设工坊：在浏览器内完成工科简支梁任务解析、计算复核、知识检索和可编辑报告导出，课程资料不通过网站上传。">
+ <link rel="icon" href="data:,">
+ <title>课设工坊 · 工科课程设计助手</title>
+ <link rel="stylesheet" href="assets/tailwind.css">
+ <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+ <link rel="stylesheet" href="assets/style.css">
+ <script defer src="assets/vendor/fflate-0.8.3.js"></script>
+ <script defer src="knowledge/base.js"></script>
+ <script defer src="assets/core.js"></script>
+ <script defer src="assets/files.js"></script>
+ <script defer src="assets/report.js"></script>
+ <script defer src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到工作区</a>
+<div class="shell">
+ <aside class="sidebar" aria-label="主导航">
+  <div class="brand"><span class="brand-icon"><i class="fa fa-cubes" aria-hidden="true"></i></span><div>课设工坊<small>COURSEFORGE / 1.0</small></div></div>
+  <div class="workspace-label">我的工程工作台</div>
+  <nav id="nav">
+   <button data-view="overview" class="nav-item active" aria-current="page"><i class="fa fa-th-large" aria-hidden="true"></i>工作概览</button>
+   <button data-view="task" class="nav-item"><i class="fa fa-file-text-o" aria-hidden="true"></i>任务与参数</button>
+   <button data-view="compute" class="nav-item"><i class="fa fa-calculator" aria-hidden="true"></i>计算与图表</button>
+   <button data-view="review" class="nav-item"><i class="fa fa-check-square-o" aria-hidden="true"></i>报告检查</button>
+   <button data-view="knowledge" class="nav-item"><i class="fa fa-book" aria-hidden="true"></i>独立知识库<span class="nav-count">20</span></button>
+   <button data-view="report" class="nav-item"><i class="fa fa-file-word-o" aria-hidden="true"></i>报告导出</button>
+   <button data-view="security" class="nav-item"><i class="fa fa-shield" aria-hidden="true"></i>数据与安全</button>
+  </nav>
+  <div class="sidebar-bottom"><div class="privacy-dot"></div><span>浏览器计算 · 不上传资料</span><small>当前为本地规则工具版<br>公开工具版 · 尚未连接 TeleAgent</small></div>
+ </aside>
+ <div class="main-shell">
+  <header class="topbar"><div class="breadcrumb">课程设计 <span>/</span> <strong id="view-label">工作概览</strong></div><div class="top-actions"><span class="local-tag"><i class="fa fa-lock" aria-hidden="true"></i> 浏览器会话</span><button id="save-project" class="text-button"><i class="fa fa-download" aria-hidden="true"></i> 保存项目</button><button id="restore-project" class="text-button">导入项目</button></div></header>
+  <main id="main" tabindex="-1">
+   <div class="page-heading"><div><div class="eyebrow">从任务书到可检查的计算报告</div><h1 id="page-title">把每一步课设，做得有依据。</h1><p id="page-subtitle">简支梁教学样例 · 参数、计算与报告保持一致</p></div><button id="run-workflow" class="primary"><i class="fa fa-play" aria-hidden="true"></i> 运行课设流程</button></div>
+   <div id="view-content"></div>
+  </main>
+  <footer>课设工坊 1.0 <span>本版覆盖简支线弹性梁教学计算；计算范围随报告导出。</span><button id="help-button">使用说明</button></footer>
+ </div>
+ <aside class="assistant" aria-label="过程助手">
+  <div class="assistant-heading"><div class="assistant-avatar"><i class="fa fa-cube" aria-hidden="true"></i></div><div><strong>课设过程助手</strong><small>规则编排 · 本地知识检索</small></div><span class="online-dot" title="本地工具可用"></span></div>
+  <div class="assistant-intro">让任务、计算和报告连起来。<br>每个关键结果，都能回到输入。</div>
+  <div id="messages" class="messages" role="log" aria-live="polite"></div>
+  <div class="quick-actions"><button data-action="parse">解析任务</button><button data-action="calculate">复算参数</button><button data-action="review">检查报告</button></div>
+  <form id="assistant-form"><label class="sr-only" for="assistant-input">输入操作或知识问题</label><textarea id="assistant-input" maxlength="500" rows="2" placeholder="试试：计算当前参数 / 为什么要核对自重？"></textarea><div class="composer-bottom"><span>仅在本机处理</span><button type="submit" class="send" aria-label="发送"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></div></form>
+ </aside>
+</div>
+<input id="task-file" type="file" accept=".txt,.md,.docx" hidden>
+<input id="review-file" type="file" accept=".txt,.md,.docx" hidden>
+<input id="project-file" type="file" accept=".json" hidden>
+<input id="knowledge-file" type="file" accept=".json" hidden>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="help-dialog"><h2>课设工坊使用说明</h2><p>先导入任务书或加载教学示例，核对参数来源，再运行计算。报告检查使用明确标签与单位匹配关键结果，检查范围会随结果展示。</p><p>支持 TXT、Markdown、无宏 DOCX，单文件最大 2MB。PDF、公式图片和扫描件请先转为文本。DOCX 仅提取文字，不保留原模板版式。</p><p>课程资料仅在当前浏览器页面会话内存中；刷新或关闭页面会清空。需要保留时，请主动“保存项目”。项目文件包含任务与报告文字，应由本人妥善保存。</p><p>计算输出为教学线弹性分析结果，未做配筋、稳定、裂缝与规范合规验算。本网站未连接外部模型；TeleAgent 接入需在客户端另行配置。</p><form method="dialog"><button class="primary">明白了</button></form></dialog>
+</body></html>

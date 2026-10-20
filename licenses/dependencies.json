@@ -1,0 +1,45 @@
+{
+  "runtime": [
+    {
+      "name": "fflate",
+      "version": "0.8.3",
+      "license": "MIT",
+      "purpose": "DOCX ZIP and DEFLATE"
+    },
+    {
+      "name": "font-awesome",
+      "version": "4.7.0",
+      "license": "OFL-1.1 AND MIT",
+      "purpose": "local icons"
+    }
+  ],
+  "buildOnly": [
+    {
+      "name": "tailwindcss",
+      "version": "4.3.3",
+      "license": "MIT"
+    },
+    {
+      "name": "@tailwindcss/cli",
+      "version": "4.3.3",
+      "license": "MIT"
+    }
+  ],
+  "testOnly": [
+    {
+      "name": "jsdom",
+      "version": "30.0.1",
+      "license": "MIT"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "license": "BSD-3-Clause (see full license)",
+      "bundled": false
+    }
+  ],
+  "notes": [
+    "No node_modules or Python third-party package trees are included in this deliverable.",
+    "Browser loads same-site pinned assets; no third-party CDN scripts or telemetry."
+  ]
+}
