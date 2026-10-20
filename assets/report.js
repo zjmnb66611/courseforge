@@ -4,7 +4,7 @@
  function sections(result,projectName='简支梁课程设计教学报告'){
   const p=result.input;
   return [
-   {title:projectName,body:'教学计算记录 · 课设工坊 1.0\n数据来源：用户在本地确认的输入；示例数据需以实际任务书替换。'},
+   {title:projectName,body:'教学计算记录 · 课设工坊 1.1\n数据来源：用户在本地确认的输入；示例数据需以实际任务书替换。'},
    {title:'任务与模型',body:result.scope},
    {title:'输入参数',body:Object.entries(root.CourseCore.SPECS).map(([k,s])=>`${s[0]} ${k} = ${fmt(p[k])} ${s[1]}`).join('\n')},
    {title:'计算过程',body:`统一单位后计算 I = bh³/12 = ${fmt(result.I,8)} m⁴，EI = ${fmt(result.EI)} kN·m²。\n由整体平衡得 RA = qL/2 + P(L−a)/L = ${fmt(result.RA)} kN；RB = qL/2 + Pa/L = ${fmt(result.RB)} kN。\nM(x) = RA·x − qx²/2 − P·max(0,x−a)。最大弯矩 ${fmt(result.Mmax)} kN·m，位置 x = ${fmt(result.xM)} m。\n线弹性叠加计算最大向下挠度 ${fmt(result.dmax)} mm，位置 x = ${fmt(result.xD)} m。\n截面边缘弹性弯曲应力 σ = Mh/(2I) = ${fmt(result.stress)} MPa。`},

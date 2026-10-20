@@ -10,19 +10,20 @@
  <title>课设工坊 · 工科课程设计助手</title>
  <link rel="stylesheet" href="assets/tailwind.css">
  <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
- <link rel="stylesheet" href="assets/style.css">
+ <link rel="stylesheet" href="assets/style.css?v=1.1.0">
+ <link rel="stylesheet" href="assets/refinements.css?v=1.1.0">
  <script defer src="assets/vendor/fflate-0.8.3.js"></script>
  <script defer src="knowledge/base.js"></script>
  <script defer src="assets/core.js"></script>
  <script defer src="assets/files.js"></script>
- <script defer src="assets/report.js"></script>
- <script defer src="assets/app.js"></script>
+ <script defer src="assets/report.js?v=1.1.0"></script>
+ <script defer src="assets/app.js?v=1.1.0"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">跳到工作区</a>
 <div class="shell">
  <aside class="sidebar" aria-label="主导航">
-  <div class="brand"><span class="brand-icon"><i class="fa fa-cubes" aria-hidden="true"></i></span><div>课设工坊<small>COURSEFORGE / 1.0</small></div></div>
+  <div class="brand"><span class="brand-icon"><i class="fa fa-cubes" aria-hidden="true"></i></span><div>课设工坊<small>COURSEFORGE / 1.1</small></div></div>
   <div class="workspace-label">我的工程工作台</div>
   <nav id="nav">
    <button data-view="overview" class="nav-item active" aria-current="page"><i class="fa fa-th-large" aria-hidden="true"></i>工作概览</button>
@@ -36,21 +37,23 @@
   <div class="sidebar-bottom"><div class="privacy-dot"></div><span>浏览器计算 · 不上传资料</span><small>当前为本地规则工具版<br>公开工具版 · 尚未连接 TeleAgent</small></div>
  </aside>
  <div class="main-shell">
-  <header class="topbar"><div class="breadcrumb">课程设计 <span>/</span> <strong id="view-label">工作概览</strong></div><div class="top-actions"><span class="local-tag"><i class="fa fa-lock" aria-hidden="true"></i> 浏览器会话</span><button id="save-project" class="text-button"><i class="fa fa-download" aria-hidden="true"></i> 保存项目</button><button id="restore-project" class="text-button">导入项目</button></div></header>
+  <header class="topbar"><div class="breadcrumb">课程设计 <span>/</span> <strong id="view-label">工作概览</strong></div><div class="top-actions"><span id="save-status" class="save-status" role="status">资料仅保留在本次会话</span><span class="local-tag"><i class="fa fa-lock" aria-hidden="true"></i> 浏览器会话</span><button id="save-project" class="text-button"><i class="fa fa-download" aria-hidden="true"></i> 保存项目</button><button id="restore-project" class="text-button">导入项目</button></div></header>
   <main id="main" tabindex="-1">
    <div class="page-heading"><div><div class="eyebrow">从任务书到可检查的计算报告</div><h1 id="page-title">把每一步课设，做得有依据。</h1><p id="page-subtitle">简支梁教学样例 · 参数、计算与报告保持一致</p></div><button id="run-workflow" class="primary"><i class="fa fa-play" aria-hidden="true"></i> 运行课设流程</button></div>
-   <div id="view-content"></div>
+   <div id="view-content"><p class="loading-note">正在准备课程工作台…</p></div>
   </main>
-  <footer>课设工坊 1.0 <span>本版覆盖简支线弹性梁教学计算；计算范围随报告导出。</span><button id="help-button">使用说明</button></footer>
+  <footer>课设工坊 1.1 <span>本版覆盖简支线弹性梁教学计算；计算范围随报告导出。</span><button id="help-button">使用说明</button></footer>
  </div>
- <aside class="assistant" aria-label="过程助手">
-  <div class="assistant-heading"><div class="assistant-avatar"><i class="fa fa-cube" aria-hidden="true"></i></div><div><strong>课设过程助手</strong><small>规则编排 · 本地知识检索</small></div><span class="online-dot" title="本地工具可用"></span></div>
+ <aside id="assistant-panel" class="assistant" aria-label="过程助手">
+  <div class="assistant-heading"><div class="assistant-avatar"><i class="fa fa-cube" aria-hidden="true"></i></div><div><strong>课设过程助手</strong><small>规则编排 · 本地知识检索</small></div><button id="assistant-close" class="assistant-close" type="button" aria-label="关闭过程助手"><i class="fa fa-times" aria-hidden="true"></i></button></div>
   <div class="assistant-intro">让任务、计算和报告连起来。<br>每个关键结果，都能回到输入。</div>
   <div id="messages" class="messages" role="log" aria-live="polite"></div>
   <div class="quick-actions"><button data-action="parse">解析任务</button><button data-action="calculate">复算参数</button><button data-action="review">检查报告</button></div>
-  <form id="assistant-form"><label class="sr-only" for="assistant-input">输入操作或知识问题</label><textarea id="assistant-input" maxlength="500" rows="2" placeholder="试试：计算当前参数 / 为什么要核对自重？"></textarea><div class="composer-bottom"><span>仅在本机处理</span><button type="submit" class="send" aria-label="发送"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></div></form>
+  <form id="assistant-form"><label class="sr-only" for="assistant-input">输入操作或知识问题</label><textarea id="assistant-input" maxlength="500" rows="2" placeholder="试试：计算当前参数 / 为什么要核对自重？"></textarea><div class="composer-bottom"><span>Enter 发送 · Shift+Enter 换行</span><button type="submit" class="send" aria-label="发送"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></div></form>
  </aside>
 </div>
+<button id="assistant-toggle" class="assistant-toggle" type="button" aria-controls="assistant-panel" aria-expanded="false"><i class="fa fa-comment-o" aria-hidden="true"></i> 过程助手</button>
+<noscript><p class="notice">请启用 JavaScript，才能进行本地计算和报告导出。</p></noscript>
 <input id="task-file" type="file" accept=".txt,.md,.docx" hidden>
 <input id="review-file" type="file" accept=".txt,.md,.docx" hidden>
 <input id="project-file" type="file" accept=".json" hidden>
